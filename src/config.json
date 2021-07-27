@@ -1,0 +1,4 @@
+{
+    "GRAPHQL_URL": "https://graphql-pokemon2.vercel.app",
+    "SHOULD_CONNECT_TO_DEV_TOOL": true
+}
