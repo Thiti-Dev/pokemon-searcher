@@ -1,91 +1,91 @@
 export interface IPokemon {
-    number: 'string';
-    name: 'string';
+    number: string;
+    name: string;
     weight: {
-        minimum: 'string';
-        maximum: 'string';
+        minimum: string;
+        maximum: string;
     };
     height: {
-        minimum: 'string';
-        maximum: 'string';
+        minimum: string;
+        maximum: string;
     };
-    classification: 'string';
-    types: ['string'];
-    resistant: ['string'];
+    classification: string;
+    types: [string];
+    resistant: [string];
     attacks: {
         fast: [
             {
-                name: 'string';
-                type: 'string';
-                damage: 'number';
+                name: string;
+                type: string;
+                damage: number;
             },
         ];
         special: [
             {
-                name: 'string';
-                type: 'string';
-                damage: 'number';
+                name: string;
+                type: string;
+                damage: number;
             },
         ];
     };
-    weaknesses: ['string'];
-    fleeRate: 'number';
-    maxCP: 'number';
+    weaknesses: [string];
+    fleeRate: number;
+    maxCP: number;
     evolutions: [
         {
-            number: 'string';
-            name: 'string';
+            number: string;
+            name: string;
             weight: {
-                minimum: 'string';
-                maximum: 'string';
+                minimum: string;
+                maximum: string;
             };
             height: {
-                minimum: 'string';
-                maximum: 'string';
+                minimum: string;
+                maximum: string;
             };
-            classification: 'string';
-            types: ['string'];
-            resistant: ['string'];
+            classification: string;
+            types: [string];
+            resistant: [string];
             attacks: {
                 fast: [
                     {
-                        name: 'string';
-                        type: 'string';
-                        damage: 'number';
+                        name: string;
+                        type: string;
+                        damage: number;
                     },
                 ];
                 special: [
                     {
-                        name: 'string';
-                        type: 'string';
-                        damage: 'number';
+                        name: string;
+                        type: string;
+                        damage: number;
                     },
                 ];
             };
-            weaknesses: ['string'];
-            fleeRate: 'number';
-            maxCP: 'number';
+            weaknesses: [string];
+            fleeRate: number;
+            maxCP: number;
             evolutions: [
                 {
-                    number: 'string';
-                    name: 'string';
+                    number: string;
+                    name: string;
                     weight: {
-                        minimum: 'string';
-                        maximum: 'string';
+                        minimum: string;
+                        maximum: string;
                     };
                     height: {
-                        minimum: 'string';
-                        maximum: 'string';
+                        minimum: string;
+                        maximum: string;
                     };
-                    classification: 'string';
-                    types: ['string'];
-                    resistant: ['string'];
+                    classification: string;
+                    types: [string];
+                    resistant: [string];
                     attacks: {
                         fast: [
                             {
-                                name: 'string';
-                                type: 'string';
-                                damage: 'number';
+                                name: string;
+                                type: string;
+                                damage: number;
                             },
                         ];
                         special: [null];
