@@ -23,12 +23,30 @@ const PokemonContext = React.createContext<IPokemonContext>({
 
 
 class PokemonProvider extends Component<{},Omit<IPokemonContext,keyof IPokemonContextFunction>>{
+    _isMounted = false;
     constructor(props:any){
         super(props)
         this.state = {
             pokemon_name_lists: null
         }
     }
+
+    //
+    // ─── SAFE MOUNTING AND UNMOUNTING ───────────────────────────────────────────────
+    //
+
+        
+    componentDidMount() {
+        this._isMounted = true;
+    }
+    componentWillUnmount() {
+        this._isMounted = false;
+    }
+
+    // ────────────────────────────────────────────────────────────────────────────────
+
+
+
     /**
      * 
      * @returns Promise<void>
@@ -48,6 +66,7 @@ class PokemonProvider extends Component<{},Omit<IPokemonContext,keyof IPokemonCo
             `
         )
         //TODO handling case of the error here from the graphql
+        if(!this._isMounted) return // for getting rid of the testing unmount warning
         this.setState({pokemon_name_lists:data.pokemons.map((ele:any,index:number) => ele.name)})
         console.log('[DEBUG]: all pokemon names has been loaded in to the context')
     }
