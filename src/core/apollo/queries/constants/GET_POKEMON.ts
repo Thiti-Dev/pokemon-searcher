@@ -17,7 +17,31 @@ export const QUERY_GET_POKEMON = gql`
                 name
                 number
             }
+            weight {
+                maximum
+                minimum
+            }
+            height {
+                maximum
+                minimum
+            }
             maxHP
+            maxCP
+            fleeRate
+            resistant
+            weaknesses
+            attacks {
+                fast {
+                    name
+                    type
+                    damage
+                }
+                special {
+                    name
+                    type
+                    damage
+                }
+            }
             image
         }
     }
