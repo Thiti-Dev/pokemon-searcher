@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client';
-import React, { Component, ComponentClass, ReactElement, StatelessComponent } from 'react'
+import React, { Component, ComponentClass, StatelessComponent } from 'react'
 import { APOLLO_query } from '../../core/apollo/common';
 type ComponentConstructor<P> = ComponentClass<P> | StatelessComponent<P>;
 

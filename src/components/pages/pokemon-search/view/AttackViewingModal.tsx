@@ -1,6 +1,5 @@
 import React from 'react'
-import { SxProps, SystemProps } from '@material-ui/system';
-import Typography from '@material-ui/core/Typography';
+import { SxProps } from '@material-ui/system';
 import Modal from '@material-ui/core/Modal';
 import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
