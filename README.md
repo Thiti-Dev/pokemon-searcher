@@ -13,14 +13,20 @@ A web-application that provides the ability for you to search and view the speci
 
 ## 🚀 Getting Started
 
-1. **Run the test**
+1. **Install the modules**
+
+```sh
+yarn install
+```
+
+2. **Run the test**
 
 ```sh
 yarn test
 ```
 
 
-2. **Start react server**
+3. **Start react server**
 
 ```sh
 yarn start
