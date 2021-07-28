@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Loader } from './core/loader';
+
+Loader.init() // initializing the font , etc . . .
 
 ReactDOM.render(
   <React.StrictMode>
