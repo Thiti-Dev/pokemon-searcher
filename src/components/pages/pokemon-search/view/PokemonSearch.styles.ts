@@ -14,8 +14,8 @@ export const FloatingLabelProperties = styled.p`
 
 export const PokeCardTemplate = styled.div`
     position: relative;
-    width: 250px;
-    height: 350px;
+    min-width: 250px;
+    min-height: 350px;
     background-image: url(${IMAGE_CARD_TEMPLATE});
     background-position: center;
     background-repeat: no-repeat;
@@ -25,8 +25,8 @@ export const PokeCardTemplate = styled.div`
 
 export const PokeCardImage = styled.div<{ img_path: string }>`
     position: absolute;
-    width: 84%;
-    height: 43.2%;
+    width: 84%; // old 84%
+    height: 43.2%; // old 43.2%
     background-image: url(${(props) => props.img_path});
     /* background-color: red; */
     background-position: center;

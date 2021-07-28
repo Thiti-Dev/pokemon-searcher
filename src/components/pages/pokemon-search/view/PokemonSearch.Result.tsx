@@ -15,7 +15,7 @@ interface IProps{
 const ContentContainer = styled.div`
     width: 100%;
     height: 500px;
-    background-color: wheat;
+    /* background-color: wheat; */
     display: flex;
     flex-direction: row;
     align-items: center;
