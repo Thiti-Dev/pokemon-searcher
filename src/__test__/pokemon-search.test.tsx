@@ -19,30 +19,29 @@ const renderWithRouter = (ui:any, {route = '/'} = {}) => {
 //afterEach(cleanup)
 beforeEach(cleanup)
 
-
-test('Searching the Bulbasaur by query string', async() => {
-  const route = '/pokemon-search?search=Bulbasaur'
-  await act(async () => {
-    renderWithRouter(<App />, {route})
-    await waitFor(() => screen.getByTestId("pokemon-type"))
+describe('Pokemon searcher', () => {
+  it('Search for Bulbasaur and get correct datas', async() => {
+      const route = '/pokemon-search?search=Bulbasaur'
+      await act(async () => {
+        renderWithRouter(<App />, {route})
+        await waitFor(() => screen.getByTestId("pokemon-type"))
+      })
+      expect(screen.getByText(/Types:Grass,Poison/i)).toBeInTheDocument()
   })
-  expect(screen.getByText(/Types:Grass,Poison/i)).toBeInTheDocument()
-})
-
-test('Searching the Charmander by query string', async() => {
-  const route = '/pokemon-search?search=Charmander'
-  await act(async() => {
-    renderWithRouter(<App />, {route})
-    await waitFor(() => screen.getByTestId("pokemon-type"))
+  it('Search for Charmander and get correct datas', async() => {
+    const route = '/pokemon-search?search=Charmander'
+    await act(async () => {
+      renderWithRouter(<App />, {route})
+      await waitFor(() => screen.getByTestId("pokemon-type"))
+    })
+    expect(screen.getByText(/Types:Fire/i)).toBeInTheDocument()
   })
-  expect(screen.getByText(/Types:Fire/i)).toBeInTheDocument()
-})
-
-test('Searching the Squirtle by query string', async() => {
-  const route = '/pokemon-search?search=Squirtle'
-  await act(async() => {
-    renderWithRouter(<App />, {route})
-    await waitFor(() => screen.getByTestId("pokemon-type"))
+  it('Search for Squirtle and get correct datas', async() => {
+    const route = '/pokemon-search?search=Squirtle'
+    await act(async () => {
+      renderWithRouter(<App />, {route})
+      await waitFor(() => screen.getByTestId("pokemon-type"))
+    })
+    expect(screen.getByText(/Types:Water/i)).toBeInTheDocument()
   })
-  expect(screen.getByText(/Types:Water/i)).toBeInTheDocument()
 })
