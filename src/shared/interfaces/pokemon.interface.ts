@@ -1,3 +1,64 @@
+interface IEvolution {
+    number: string;
+    name: string;
+    weight: {
+        minimum: string;
+        maximum: string;
+    };
+    height: {
+        minimum: string;
+        maximum: string;
+    };
+    classification: string;
+    types: [string];
+    resistant: [string];
+    attacks: {
+        fast: [
+            {
+                name: string;
+                type: string;
+                damage: number;
+            },
+        ];
+        special: [
+            {
+                name: string;
+                type: string;
+                damage: number;
+            },
+        ];
+    };
+    weaknesses: [string];
+    fleeRate: number;
+    maxCP: number;
+    evolutions: [
+        {
+            number: string;
+            name: string;
+            weight: {
+                minimum: string;
+                maximum: string;
+            };
+            height: {
+                minimum: string;
+                maximum: string;
+            };
+            classification: string;
+            types: [string];
+            resistant: [string];
+            attacks: {
+                fast: [
+                    {
+                        name: string;
+                        type: string;
+                        damage: number;
+                    },
+                ];
+                special: [null];
+            };
+        },
+    ];
+}
 export interface IPokemon {
     image: string;
 
@@ -34,67 +95,5 @@ export interface IPokemon {
     fleeRate: number;
     maxCP: number;
     maxHP: number;
-    evolutions: [
-        {
-            number: string;
-            name: string;
-            weight: {
-                minimum: string;
-                maximum: string;
-            };
-            height: {
-                minimum: string;
-                maximum: string;
-            };
-            classification: string;
-            types: [string];
-            resistant: [string];
-            attacks: {
-                fast: [
-                    {
-                        name: string;
-                        type: string;
-                        damage: number;
-                    },
-                ];
-                special: [
-                    {
-                        name: string;
-                        type: string;
-                        damage: number;
-                    },
-                ];
-            };
-            weaknesses: [string];
-            fleeRate: number;
-            maxCP: number;
-            evolutions: [
-                {
-                    number: string;
-                    name: string;
-                    weight: {
-                        minimum: string;
-                        maximum: string;
-                    };
-                    height: {
-                        minimum: string;
-                        maximum: string;
-                    };
-                    classification: string;
-                    types: [string];
-                    resistant: [string];
-                    attacks: {
-                        fast: [
-                            {
-                                name: string;
-                                type: string;
-                                damage: number;
-                            },
-                        ];
-                        special: [null];
-                    };
-                },
-            ];
-        },
-    ];
+    evolutions: IEvolution[] | null;
 }
