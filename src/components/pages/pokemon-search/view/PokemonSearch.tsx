@@ -53,8 +53,6 @@ const PokemonSearch:React.FC<any> = () => {
     history.push({pathname:'/pokemon-search',search: "?" + new URLSearchParams({search: name}).toString()})
     setFocusedPokemon(name)
   }
-
-  console.log(loading)
   return (
       <Container fixed style={{ paddingTop:20 }}>
         <Autocomplete
@@ -68,7 +66,6 @@ const PokemonSearch:React.FC<any> = () => {
         />
         {loading ? <LinearProgress />: null}
         {error ? <Alert severity="error">This is an error alert — check it out!</Alert> : null}
-
         <PokemonSearchResult view_pokemon={onSearchPokemon} pokemon={data?.pokemon} loading={loading}/>
       </Container>
   )
