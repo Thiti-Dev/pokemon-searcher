@@ -1,0 +1,97 @@
+import styled from '@emotion/styled';
+import React, { useState } from 'react'
+import { IPokemon } from '../../../../shared/interfaces/pokemon.interface';
+import { PokeCardTemplate,PokeCardImage, PokeCardName,PokeCardHPCPText,PokeCardHPCPBar,PokeDescriptionBody,PokeCardDescriptionText } from './PokemonSearch.styles';
+import Chip from '@material-ui/core/Chip';
+import Stack from '@material-ui/core/Stack';
+import AttackViewingModal from './AttackViewingModal';
+
+interface IProps{
+    pokemon: IPokemon | null | undefined
+    view_pokemon: (name:string|null) => void
+}
+
+const ContentContainer = styled.div`
+    width: 100%;
+    height: 500px;
+    background-color: wheat;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+`
+
+const SideContent = styled.div`
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
+    margin-left: 20px;
+`
+
+const SideContentItem = styled.div`
+    margin-bottom: 10px;
+`
+
+
+const PokemonSearchResult:React.FC<IProps> = ({pokemon,view_pokemon}) => {
+    const [viewingAttackData,setViewingAttackData] = useState<{type: "normal"|"special",attack_datas:IPokemon['attacks']['special'] | IPokemon['attacks']['fast'] | null }>({attack_datas:null,type:"normal"})
+    if(!pokemon) return null
+    const {name,maxHP,maxCP,image,height,weight,fleeRate,types,evolutions,attacks:{fast:fastAttacks,special:specialAttacks}} = pokemon
+
+    //
+    // ─── CALLBACKS ──────────────────────────────────────────────────────────────────
+    //
+    function onViewAttacks(type: "normal"|"special",attack_datas:  IPokemon['attacks']['special'] | IPokemon['attacks']['fast']){
+        setViewingAttackData({type,attack_datas})
+    }
+    function onStopViewingAttacks(){
+        setViewingAttackData({type:"normal",attack_datas: null})
+    }
+    // ────────────────────────────────────────────────────────────────────────────────
+
+
+    return (
+            <ContentContainer>
+                <AttackViewingModal visible={viewingAttackData.attack_datas===null ? false : true} type={viewingAttackData.type} attack_datas={viewingAttackData.attack_datas} on_close={onStopViewingAttacks}/>
+                <PokeCardTemplate>
+                    <PokeCardName>{name}</PokeCardName>
+                    <PokeCardImage img_path={image}/>
+                    <PokeCardHPCPBar>
+                        <PokeCardHPCPText>MaxHP:{maxHP}</PokeCardHPCPText> 
+                        <PokeCardHPCPText>MaxCP:{maxCP}</PokeCardHPCPText> 
+                    </PokeCardHPCPBar>
+                    <PokeDescriptionBody>
+                        <PokeCardDescriptionText>Height:{height.minimum} - {height.maximum}</PokeCardDescriptionText>
+                        <PokeCardDescriptionText>Weight:{weight.minimum} - {weight.maximum}</PokeCardDescriptionText>
+                        <PokeCardDescriptionText>FleeRate:{fleeRate}</PokeCardDescriptionText>
+                        <PokeCardDescriptionText>Types:{types.join(",")}</PokeCardDescriptionText>
+                    </PokeDescriptionBody>
+                </PokeCardTemplate>
+                <SideContent>
+                    <SideContentItem> Name: <Chip label={name} size="small" /></SideContentItem>
+                     <SideContentItem> Types: {
+                            types.map((poketype,index) => (
+                                
+                                    <Chip key={`POKETYPE-${index}`} style={{ marginRight:3 }} size="small" label={poketype} color="secondary" variant="outlined" />
+                            ))
+                        }
+                    </SideContentItem>
+                    {
+                        evolutions ? <SideContentItem> Evolution: {
+                            (evolutions).map((evodata) => <Chip key={evodata.name} onClick={() => view_pokemon(evodata.name)} clickable style={{ marginRight:3 }} size="small" label={evodata.name} color="success" variant="outlined" />)
+                         }
+                     </SideContentItem> : <SideContentItem>
+                         Evolutions: <Chip style={{ marginRight:3 }} size="small" label="No evolution" color="success" variant="outlined" />
+                     </SideContentItem> 
+                    }
+                    <SideContentItem>
+                        Normal Attack:  <Chip onClick={onViewAttacks.bind(null,"normal",fastAttacks)} clickable style={{ marginRight:3 }} size="small" label={`View ${fastAttacks.length} normal attack`} color="warning" />
+                    </SideContentItem>
+                    <SideContentItem>
+                        Special Attack:  <Chip onClick={onViewAttacks.bind(null,"special",specialAttacks)} clickable style={{ marginRight:3 }} size="small" label={`View ${specialAttacks.length} special attack`} color="error" />
+                    </SideContentItem>
+                </SideContent>
+            </ContentContainer>
+    )
+}
+
+export default PokemonSearchResult
