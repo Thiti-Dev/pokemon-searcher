@@ -33,6 +33,7 @@ export interface IPokemon {
     weaknesses: [string];
     fleeRate: number;
     maxCP: number;
+    maxHP: number;
     evolutions: [
         {
             number: string;
