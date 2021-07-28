@@ -1,4 +1,4 @@
-import { Container, TextField,Alert } from '@material-ui/core';
+import { Container, TextField,Alert, Breadcrumbs,Typography } from '@material-ui/core';
 import React, { useContext, useEffect, useState } from 'react'
 import { useQuery } from '../../../../shared/helpers/react-router-dom/useQuery';
 
@@ -9,6 +9,10 @@ import { PokemonContext, withPokemonProvider } from '../../../../shared/contexts
 import { $HOOK_GetPokemonQuery } from '../../../../core/apollo/queries/wrappers/pokemon.wrapper';
 import { useHistory } from 'react-router-dom';
 import PokemonSearchResult from './PokemonSearch.Result';
+
+import Link from '@material-ui/core/Link';
+import HomeIcon from '@material-ui/icons/Home';
+import SearchIcon from '@material-ui/icons/Search';
 
 const PokemonSearch:React.FC<any> = () => {
   const query = useQuery()
@@ -31,6 +35,7 @@ const PokemonSearch:React.FC<any> = () => {
 
 
   useEffect(() => {
+    document.title = "PokemonSearch🔍"
     console.log('[Pokemon-search]: mounted')
     const search_query = query.get('search')
     if(search_query){
@@ -52,9 +57,30 @@ const PokemonSearch:React.FC<any> = () => {
     if(!name) return
     history.push({pathname:'/pokemon-search',search: "?" + new URLSearchParams({search: name}).toString()})
     setFocusedPokemon(name)
+    document.title = "PokemonSearch🔍 " + name
   }
   return (
       <Container fixed style={{ paddingTop:20 }}>
+        <Breadcrumbs style={{ marginBottom:20 }} aria-label="breadcrumb">
+          <Link
+            underline="hover"
+            sx={{ display: 'flex', alignItems: 'center' }}
+            color="inherit"
+            href="/"
+          >
+            <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />
+            Landing page
+          </Link>
+
+          <Typography
+          sx={{ display: 'flex', alignItems: 'center' }}
+          color="text.primary"
+        >
+          <SearchIcon sx={{ mr: 0.5 }} fontSize="inherit" />
+          Pokemon search
+        </Typography>
+         
+        </Breadcrumbs>
         <Autocomplete
           id="search-component"
           freeSolo
