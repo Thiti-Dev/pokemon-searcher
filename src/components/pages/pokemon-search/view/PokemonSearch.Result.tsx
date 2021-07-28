@@ -67,7 +67,7 @@ const PokemonSearchResult:React.FC<IProps> = ({pokemon,view_pokemon,loading}) =>
                         <PokeCardDescriptionText>Height:{height.minimum} - {height.maximum}</PokeCardDescriptionText>
                         <PokeCardDescriptionText>Weight:{weight.minimum} - {weight.maximum}</PokeCardDescriptionText>
                         <PokeCardDescriptionText>FleeRate:{fleeRate}</PokeCardDescriptionText>
-                        <PokeCardDescriptionText>Types:{types.join(",")}</PokeCardDescriptionText>
+                        <PokeCardDescriptionText data-testid="pokemon-type">Types:{types.join(",")}</PokeCardDescriptionText>
                     </PokeDescriptionBody>
                 </PokeCardTemplate>
                 <SideContent>
