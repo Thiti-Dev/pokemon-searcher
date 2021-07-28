@@ -35,7 +35,7 @@ const SideContentItem = styled.div`
 const PokemonSearchResult:React.FC<IProps> = ({pokemon,view_pokemon}) => {
     const [viewingAttackData,setViewingAttackData] = useState<{type: "normal"|"special",attack_datas:IPokemon['attacks']['special'] | IPokemon['attacks']['fast'] | null }>({attack_datas:null,type:"normal"})
     if(!pokemon) return null
-    const {name,maxHP,maxCP,image,height,weight,fleeRate,types,evolutions,attacks:{fast:fastAttacks,special:specialAttacks}} = pokemon
+    const {name,maxHP,maxCP,image,height,weight,fleeRate,types,evolutions,attacks:{fast:fastAttacks,special:specialAttacks},weaknesses,resistant} = pokemon
 
     //
     // ─── CALLBACKS ──────────────────────────────────────────────────────────────────
@@ -83,6 +83,26 @@ const PokemonSearchResult:React.FC<IProps> = ({pokemon,view_pokemon}) => {
                          Evolutions: <Chip style={{ marginRight:3 }} size="small" label="No evolution" color="success" variant="outlined" />
                      </SideContentItem> 
                     }
+                    <SideContentItem>
+                        {
+                            resistant ? <SideContentItem> Resistants: {
+                                (resistant).map((resistantType) => <Chip key={resistantType} style={{ marginRight:3 }} size="small" label={resistantType} color="primary" variant="outlined" />)
+                             }
+                         </SideContentItem> : <SideContentItem>
+                         Resistants: <Chip style={{ marginRight:3 }} size="small" label="No resistants" color="success" variant="outlined" />
+                         </SideContentItem> 
+                        }
+                    </SideContentItem>
+                    <SideContentItem>
+                        {
+                            weaknesses ? <SideContentItem> Weaknesses: {
+                                (weaknesses).map((weaknessType) => <Chip key={weaknessType} style={{ marginRight:3 }} size="small" label={weaknessType} color="error" variant="outlined" />)
+                             }
+                         </SideContentItem> : <SideContentItem>
+                         Weaknesses: <Chip style={{ marginRight:3 }} size="small" label="No weakness" color="success" variant="outlined" />
+                         </SideContentItem> 
+                        }
+                    </SideContentItem>
                     <SideContentItem>
                         Normal Attack:  <Chip onClick={onViewAttacks.bind(null,"normal",fastAttacks)} clickable style={{ marginRight:3 }} size="small" label={`View ${fastAttacks.length} normal attack`} color="warning" />
                     </SideContentItem>
