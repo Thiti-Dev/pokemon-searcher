@@ -8,6 +8,7 @@ import { PokemonContext, withPokemonProvider } from '../../../../shared/contexts
 
 import { $HOOK_GetPokemonQuery } from '../../../../core/apollo/queries/wrappers/pokemon.wrapper';
 import { useHistory } from 'react-router-dom';
+import PokemonSearchResult from './PokemonSearch.Result';
 
 const PokemonSearch:React.FC<any> = () => {
   const query = useQuery()
@@ -41,17 +42,16 @@ const PokemonSearch:React.FC<any> = () => {
     $CONTEXT_pokemon.loadAllPokemonNames()
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
-  console.log(data)
 
   //
   // ─── PREFAB ─────────────────────────────────────────────────────────────────────
   //
-  const rendered_pokemon = data?.pokemon ? data.pokemon.number : null 
   // ────────────────────────────────────────────────────────────────────────────────
 
   function onSearchPokemon(name:string|null){
-    history.push({pathname:'/pokemon-search',search: "?" + new URLSearchParams({search: name!}).toString()})
-    setFocusedPokemon(name!)
+    if(name === null) return
+    history.push({pathname:'/pokemon-search',search: "?" + new URLSearchParams({search: name}).toString()})
+    setFocusedPokemon(name)
   }
 
 
@@ -60,14 +60,16 @@ const PokemonSearch:React.FC<any> = () => {
         <Autocomplete
           id="search-component"
           freeSolo
-          options={$CONTEXT_pokemon.pokemon_name_lists ? $CONTEXT_pokemon.pokemon_name_lists : []}
+          options={$CONTEXT_pokemon.pokemon_name_lists ? $CONTEXT_pokemon.pokemon_name_lists : ["fetching all pokemon names . . . ."]}
           renderInput={(params) => <TextField {...params} label="search for the pokemon!!!" />}
           onChange={(_,value) => onSearchPokemon(value)}
           defaultValue={baseSearchQuery}
+          value={focusedPokemon}
         />
         {loading ? <LinearProgress />: null}
         {error ? <Alert severity="error">This is an error alert — check it out!</Alert> : null}
-        {rendered_pokemon}
+
+        <PokemonSearchResult view_pokemon={onSearchPokemon} pokemon={data?.pokemon}/>
       </Container>
   )
 }
