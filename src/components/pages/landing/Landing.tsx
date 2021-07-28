@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { MainContainer,ExampleImageContainer,ExampleImage } from './Landing.styles'
 import Button from '@material-ui/core/Button';
 import PlayIcon from '@material-ui/icons/PlayArrow';
 import {Link} from 'react-router-dom'
 
 export default function Landing() {
+  useEffect(() => {
+    document.title = "🔥pokemon-searcher🔥"
+  },[])
   return (
     <MainContainer>
         <h1>Pokemon Search</h1>
