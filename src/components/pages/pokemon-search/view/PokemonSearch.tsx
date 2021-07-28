@@ -67,7 +67,7 @@ const PokemonSearch:React.FC<any> = () => {
         {focusedPokemon === "" ? null : 
           <>
             {loading ? <LinearProgress />: null}
-            {error && loading===false ? <Alert severity="error">This is an error alert — check it out!</Alert> : null}
+            {error && loading===false ? <Alert severity="error">An error occurs, try again later</Alert> : null}
             <PokemonSearchResult view_pokemon={onSearchPokemon} pokemon={data?.pokemon} loading={loading}/>
           </>
         }

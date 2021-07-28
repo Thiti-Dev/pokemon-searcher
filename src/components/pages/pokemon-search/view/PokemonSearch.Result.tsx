@@ -36,7 +36,7 @@ const SideContentItem = styled.div`
 const PokemonSearchResult:React.FC<IProps> = ({pokemon,view_pokemon,loading}) => {
     const [viewingAttackData,setViewingAttackData] = useState<{type: "normal"|"special",attack_datas:IPokemon['attacks']['special'] | IPokemon['attacks']['fast'] | null }>({attack_datas:null,type:"normal"})
     if(!pokemon && !loading) return <Alert variant="filled" severity="error">
-    The pokemon that you tryna search isn't existed in the pokemon world!!! try again
+    The pokemon that you tryna search isn't existed in the pokemon world!!!
   </Alert>
     if(!pokemon) return null
     const {name,maxHP,maxCP,image,height,weight,fleeRate,types,evolutions,attacks:{fast:fastAttacks,special:specialAttacks},weaknesses,resistant} = pokemon
