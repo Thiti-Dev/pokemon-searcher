@@ -14,7 +14,7 @@ const PokemonSearch:React.FC<any> = () => {
   const query = useQuery()
   const history = useHistory()
   const $CONTEXT_pokemon = useContext(PokemonContext)
-  const [focusedPokemon,setFocusedPokemon] = useState<string>("none")
+  const [focusedPokemon,setFocusedPokemon] = useState<string>("")
 
   //
   // ─── FLAG ───────────────────────────────────────────────────────────────────────
@@ -49,7 +49,7 @@ const PokemonSearch:React.FC<any> = () => {
   // ────────────────────────────────────────────────────────────────────────────────
 
   function onSearchPokemon(name:string|null){
-    if(name === null) return
+    if(!name) return
     history.push({pathname:'/pokemon-search',search: "?" + new URLSearchParams({search: name}).toString()})
     setFocusedPokemon(name)
   }
@@ -64,9 +64,13 @@ const PokemonSearch:React.FC<any> = () => {
           defaultValue={baseSearchQuery}
           value={focusedPokemon}
         />
-        {loading ? <LinearProgress />: null}
-        {error ? <Alert severity="error">This is an error alert — check it out!</Alert> : null}
-        <PokemonSearchResult view_pokemon={onSearchPokemon} pokemon={data?.pokemon} loading={loading}/>
+        {focusedPokemon === "" ? null : 
+          <>
+            {loading ? <LinearProgress />: null}
+            {error && loading===false ? <Alert severity="error">This is an error alert — check it out!</Alert> : null}
+            <PokemonSearchResult view_pokemon={onSearchPokemon} pokemon={data?.pokemon} loading={loading}/>
+          </>
+        }
       </Container>
   )
 }
