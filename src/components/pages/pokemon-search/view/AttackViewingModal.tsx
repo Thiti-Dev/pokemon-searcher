@@ -53,8 +53,8 @@ const AttackViewingModal:React.FC<IProps> = ({type,attack_datas,visible,on_close
         <Box sx={style}>
           <HeaderText>{type==="normal" ? "Normal" : "Special"} Attack Lists</HeaderText>
           {
-            attack_datas?.map((attack_data) => {
-              return <Card elevation={8} sx={{ display: 'flex',paddingLeft:2,paddingRight:2 }}>
+            attack_datas?.map((attack_data,index) => {
+              return <Card key={index} elevation={8} sx={{ display: 'flex',paddingLeft:2,paddingRight:2 }}>
                   <AttackDataContainer>
                     <div>
                       <AttackDataTypography>{attack_data.name}</AttackDataTypography>
