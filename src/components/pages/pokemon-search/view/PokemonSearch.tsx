@@ -54,7 +54,7 @@ const PokemonSearch:React.FC<any> = () => {
     setFocusedPokemon(name)
   }
 
-
+  console.log(loading)
   return (
       <Container fixed style={{ paddingTop:20 }}>
         <Autocomplete
@@ -69,7 +69,7 @@ const PokemonSearch:React.FC<any> = () => {
         {loading ? <LinearProgress />: null}
         {error ? <Alert severity="error">This is an error alert — check it out!</Alert> : null}
 
-        <PokemonSearchResult view_pokemon={onSearchPokemon} pokemon={data?.pokemon}/>
+        <PokemonSearchResult view_pokemon={onSearchPokemon} pokemon={data?.pokemon} loading={loading}/>
       </Container>
   )
 }

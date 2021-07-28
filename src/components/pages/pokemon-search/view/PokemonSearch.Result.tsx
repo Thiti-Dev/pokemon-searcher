@@ -3,12 +3,13 @@ import React, { useState } from 'react'
 import { IPokemon } from '../../../../shared/interfaces/pokemon.interface';
 import { PokeCardTemplate,PokeCardImage, PokeCardName,PokeCardHPCPText,PokeCardHPCPBar,PokeDescriptionBody,PokeCardDescriptionText } from './PokemonSearch.styles';
 import Chip from '@material-ui/core/Chip';
-import Stack from '@material-ui/core/Stack';
+import Alert from '@material-ui/core/Alert';
 import AttackViewingModal from './AttackViewingModal';
 
 interface IProps{
     pokemon: IPokemon | null | undefined
     view_pokemon: (name:string|null) => void
+    loading: boolean
 }
 
 const ContentContainer = styled.div`
@@ -32,8 +33,11 @@ const SideContentItem = styled.div`
 `
 
 
-const PokemonSearchResult:React.FC<IProps> = ({pokemon,view_pokemon}) => {
+const PokemonSearchResult:React.FC<IProps> = ({pokemon,view_pokemon,loading}) => {
     const [viewingAttackData,setViewingAttackData] = useState<{type: "normal"|"special",attack_datas:IPokemon['attacks']['special'] | IPokemon['attacks']['fast'] | null }>({attack_datas:null,type:"normal"})
+    if(!pokemon && !loading) return <Alert variant="filled" severity="error">
+    The pokemon that you tryna search isn't existed in the pokemon world!!! try again
+  </Alert>
     if(!pokemon) return null
     const {name,maxHP,maxCP,image,height,weight,fleeRate,types,evolutions,attacks:{fast:fastAttacks,special:specialAttacks},weaknesses,resistant} = pokemon
 
