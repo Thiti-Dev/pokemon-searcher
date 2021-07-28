@@ -1,4 +1,6 @@
 export interface IPokemon {
+    image: string;
+
     number: string;
     name: string;
     weight: {
